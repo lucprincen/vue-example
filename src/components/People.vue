@@ -76,3 +76,26 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+	
+	body{
+		background: papayawhip;
+		font-family: sans-serif;
+	}
+
+	h2{
+		text-align: center;
+		padding-bottom: 1em;
+	}
+
+	.people-list{
+		list-style: none;
+		margin: 0 auto;
+		max-width: 75%;
+
+		display: grid;
+		grid-template-columns: repeat( 4, 1fr );
+		grid-template-rows: auto;
+	}
+</style>
