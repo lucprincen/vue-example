@@ -66,8 +66,10 @@
 
 			//map data to the people attribute
 			refresh( response ){
-				console.log( response.data );
+
 				this.dataSet = response;
+				this.$emit('refreshData', response );
+
 				this.people = response.data;
 			}
 
