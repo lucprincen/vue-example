@@ -26,6 +26,11 @@ export default {
 		justify-content: space-between;
 		align-items: center;
 
+		strong{
+			text-align: right;
+			font-size: .9em;
+		}
+
 		.avatar{
 			border-radius: 32px;
 		}

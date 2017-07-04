@@ -95,7 +95,20 @@
 		max-width: 75%;
 
 		display: grid;
-		grid-template-columns: repeat( 4, 1fr );
+		grid-template-columns: 1fr;
 		grid-template-rows: auto;
 	}
+
+	@media screen and ( min-width: 768px ){
+		.people-list{
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media screen and ( min-width: 1100px ){
+		.people-list{
+			grid-template-columns: repeat( 4, 1fr );
+		}
+	}
+
 </style>
