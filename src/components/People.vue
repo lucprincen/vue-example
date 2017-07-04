@@ -1,9 +1,9 @@
 <template>
-	<div class="people-wrapper">
+	<div class="people-wrapper" aria-live="polite">
 		<h2>{{ peopleCount }}</h2>
 		<ul class="people-list">
 			<li v-for="person in people" :key="person._id">
-				<person :data="person"></person>
+				<person :data="person" @updated="save"></person>
 			</li>
 		</ul>
 	</div>
@@ -15,7 +15,7 @@
 	import Person from './Person.vue'
 
 	// a little mock data:	
-	const dataUrl = 'https://jsonbin.io/b/595b2be7194a6c7f2b904004';
+	const dataUrl = 'https://jsonbin.io/b/595bee02194a6c7f2b904008';
 
 
 	export default {
@@ -64,6 +64,12 @@
 				axios.get( dataUrl ).then( this.refresh );
 			},
 
+			save( data ){
+
+				console.log( data);
+				
+			},
+
 			//map data to the people attribute
 			refresh( response ){
 
@@ -78,7 +84,11 @@
 </script>
 
 <style lang="scss">
-	
+
+	*{
+		box-sizing: border-box;
+	}
+		
 	body{
 		background: papayawhip;
 		font-family: sans-serif;
@@ -107,7 +117,7 @@
 
 	@media screen and ( min-width: 1100px ){
 		.people-list{
-			grid-template-columns: repeat( 4, 1fr );
+			grid-template-columns: repeat( 3, 1fr );
 		}
 	}
 
