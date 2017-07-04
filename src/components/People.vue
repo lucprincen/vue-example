@@ -1,21 +1,74 @@
 <template>
 	<div class="people-wrapper">
 		<h2>{{ peopleCount }}</h2>
+		<ul class="people-list">
+			<li v-for="person in people" :key="person._id">
+				<person :data="person"></person>
+			</li>
+		</ul>
 	</div>
 </template>
 
 
 <script>
+
+	import Person from './Person.vue'
+
+	// a little mock data:	
+	const dataUrl = 'https://jsonbin.io/b/595b2be7194a6c7f2b904004';
+
+
 	export default {
 
 		name: 'people',
+
+		/** Component data */
 		data () {
-			return {}
+			return {
+				people: {},
+				dataSet: false
+			}
 		},
+
+		/** Subcomponents */
+		components: { Person },
+
+		/** Computed attributes */
 		computed: {
 
+			/**
+			 * We pluralize the people count
+			 */
 			peopleCount() {
-				return '';
+
+				let _count = this.people.length;
+				let _string = 'teammember';
+				if( _count !== 1 )
+					_string += 's';
+
+				return _count+' '+_string;
+			}
+
+		},
+
+		/** When this component gets created */
+		created() {
+			this.fetch()
+		},
+
+		/** Compontent methods */
+		methods: {
+
+			//fetch the external data
+			fetch(){
+				axios.get( dataUrl ).then( this.refresh );
+			},
+
+			//map data to the people attribute
+			refresh( response ){
+				console.log( response.data );
+				this.dataSet = response;
+				this.people = response.data;
 			}
 
 		}
