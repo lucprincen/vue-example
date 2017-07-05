@@ -113,34 +113,8 @@ export default {
 			padding: .4em;
 			background: #eee;
 			margin: .6em 0 0 0;
-			text-align: right;
-		}
-
-		.btn{
-			border: 0;
-			border-radius: 4px;
-			padding: .4em .8em;
-			background: teal;
-			color: white;
-			cursor: pointer;
-
-			&.primary{
-				background: dodgerBlue;
-			}
-
-			&:hover{
-				background: black;
-			}
-
-			&.danger{
-				background: transparent;
-				color: crimson;
-				text-decoration: underline;
-
-				&:hover{
-					color: black;
-				}
-			}
+			display: flex;
+			justify-content: flex-end;
 		}
 	}
 

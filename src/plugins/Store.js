@@ -20,6 +20,10 @@ const store = new Vuex.Store({
 			return state.people;
 		},
 
+		peopleCount: state => {
+			return state.people.length;
+		},
+
 		/** Order people by name */
 		peopleByName: state => {
 
@@ -41,8 +45,8 @@ const store = new Vuex.Store({
 		},
 
 		/** Return a single person */
-		personById: ( state, id ) => {
-			return state.people.find( person => person._id === id )
+		personById: ( state, index ) => {
+			return state.people[ index ]
 		}
 
 	},

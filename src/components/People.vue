@@ -1,7 +1,11 @@
 <template>
 	<div class="people-wrapper" aria-live="polite">
 		<h2>{{ peopleCount }}</h2>
-		<people-filter></people-filter>
+	
+		<div class="controls">
+			<add-person></add-person>
+			<people-filter></people-filter>
+		</div>
 		<ul class="people-list">
 			<li v-for="( person, index ) in people" :key="person._id">
 				
@@ -17,6 +21,7 @@
 
 	import Person from './Person.vue'
 	import PeopleFilter from './Filter.vue'
+	import AddPerson from './AddPerson.vue'
 	import {mapGetters} from 'vuex'
 
 	// a little mock data:	
@@ -28,7 +33,7 @@
 		name: 'people',
 
 		/** Subcomponents */
-		components: { Person, PeopleFilter },
+		components: { Person, PeopleFilter, AddPerson },
 
 		/** Computed attributes */
 		computed: {
@@ -53,13 +58,10 @@
 			 */
 			peopleCount() {
 
-				return this.people.length
-				let _count = this.$store.state.count;
-				let _string = 'teammember';
-				if( _count !== 1 )
-					_string += 's';
+				let _count = this.people.length
+				let _string = ( _count == 1 ? 'person' : 'people' )
 
-				return _count+' '+_string;
+				return _count+' '+ _string
 			},
 
 			//Filtered collections in the store plugin
@@ -101,15 +103,84 @@
 		padding-bottom: 1em;
 	}
 
-	.people-list{
+	.people-list, .people-wrapper > .controls{
 		list-style: none;
-		margin: 0 auto;
+		margin: 0 auto 2em auto;
+		padding: 0;
 		max-width: 75%;
+	}
 
+	.people-wrapper > .controls{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.people-list{
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 2em;
 		grid-template-rows: auto;
+	}
+
+	.svg-icon {
+	  width: 2em;
+	  height: 2em;
+	  display: inline-block;
+	}
+
+	.svg-icon path,
+	.svg-icon polygon,
+	.svg-icon rect {
+	  fill: #4691f6;
+	}
+
+	.svg-icon circle {
+	  stroke: #4691f6;
+	  stroke-width: 1;
+	}
+
+
+	.btn{
+		background: #4691f6;
+		color: white;
+		border-radius: 3px;
+		border: 0;
+		padding: .4em .8em;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+
+		.svg-icon{
+			circle{
+				stroke: white;
+			}
+			path, polygon, rect{
+				fill: white;
+			}
+		}
+
+		span{
+			padding: 0 0 0 .8em;
+		}
+
+		&.primary{
+			background: dodgerBlue;
+		}
+
+		&:hover{
+			background: black;
+		}
+
+		&.danger{
+			background: transparent;
+			color: crimson;
+			text-decoration: underline;
+
+			&:hover{
+				color: black;
+			}
+		}	
 	}
 
 	@media screen and ( min-width: 768px ){

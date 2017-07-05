@@ -48,8 +48,6 @@ export default {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
-		max-width: 75%;
-		margin: 0 auto 2em auto;
 
 		h4{
 			margin: 0 1em 0 0;
@@ -89,22 +87,4 @@ export default {
 			}
 		}
 	}
-
-	.svg-icon {
-	  width: 2em;
-	  height: 2em;
-	  display: inline-block;
-	}
-
-	.svg-icon path,
-	.svg-icon polygon,
-	.svg-icon rect {
-	  fill: #4691f6;
-	}
-
-	.svg-icon circle {
-	  stroke: #4691f6;
-	  stroke-width: 1;
-	}
-
 </style>
