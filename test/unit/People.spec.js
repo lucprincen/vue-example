@@ -18,4 +18,5 @@ describe('People.vue', () => {
   	expect( typeof People.methods.fetch ).toBe( 'function' );
   })
 
+
 });

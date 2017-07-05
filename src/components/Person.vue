@@ -28,7 +28,7 @@
 
 export default {
 	name: 'person',
-	props: ['data'],
+	props: ['data', 'index'],
 	data() {
 
 		return {
@@ -45,11 +45,12 @@ export default {
 			this.editing = false
 			this.data.full_name = this.full_name;
 			this.data.company = this.company;
-			this.$emit( 'updated', this.data );
+
+			this.$store.commit( 'edit', [this.data, this.index])
 		},
 
 		destroy(){
-
+			this.$store.commit( 'remove', this.index )
 		}
 
 	}
@@ -65,7 +66,7 @@ export default {
 		background: white;
 		box-shadow: 0 2px 4px rgba(0,0,0,.2), 0 0 5px rgba(0,0,0,.1);
 		border-radius: 3px;
-		margin: 0 1.5em 1.5em 0;
+		margin: 0;
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: space-between;
