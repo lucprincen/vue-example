@@ -3,6 +3,11 @@
 // This is done with the browser options. For the config, see package.json
 import Vue from 'vue'
 import App from './App.vue'
+import Vuex from 'vuex'  
+import Store from './plugins/Store'
+
+Vue.use(Vuex)
+Vue.use(Store)
 
 window.axios = require('axios');
 

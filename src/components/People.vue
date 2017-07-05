@@ -2,8 +2,14 @@
 	<div class="people-wrapper" aria-live="polite">
 		<h2>{{ peopleCount }}</h2>
 		<ul class="people-list">
-			<li v-for="person in people" :key="person._id">
-				<person :data="person" @updated="save"></person>
+			<li v-for="( person, index ) in people" :key="person._id">
+				
+				<person 
+					:data="person" 
+					@updated="save( index, data )" 
+					@deleted="remove( index )"
+				></person>
+
 			</li>
 		</ul>
 	</div>
@@ -41,7 +47,7 @@
 			 */
 			peopleCount() {
 
-				let _count = this.people.length;
+				let _count = this.$store.state.count;
 				let _string = 'teammember';
 				if( _count !== 1 )
 					_string += 's';
@@ -64,10 +70,14 @@
 				axios.get( dataUrl ).then( this.refresh );
 			},
 
-			save( data ){
+			save( index, data ){
 
 				console.log( data);
 				
+			},
+
+			remove( index ){
+
 			},
 
 			//map data to the people attribute
