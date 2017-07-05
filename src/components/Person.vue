@@ -5,11 +5,11 @@
 			
 			<div class="form-control">
 				<label for="nameInput">Name</label>
-				<input id="nameInput" v-model="full_name">
+				<input id="nameInput" v-model="full_name" @keyup.enter="save">
 			</div>
 			<div class="form-control">
 				<label for="companyInput">Company</label>
-				<input id="companyInput" v-model="company">
+				<input id="companyInput" v-model="company" @keyup.enter="save">
 			</div>
 		</div>
 		<div class="content" v-else>
@@ -17,9 +17,9 @@
 			<i>{{ company }}</i>
 		</div>
 		<div class="controls">
+			<button class="btn primary" @click="save" v-if="editing">Save</button>
 			<button class="btn" @click="editing=true" v-if="!editing">Edit</button>
 			<button class="btn danger" @click="destroy" v-if="!editing">Delete</button>
-			<button class="btn primary" @click="save" v-if="editing">Save</button>
 		</div>
 	</div>
 </template>
@@ -46,11 +46,11 @@ export default {
 			this.data.full_name = this.full_name;
 			this.data.company = this.company;
 
-			this.$store.commit( 'edit', [this.data, this.index])
+			this.$store.dispatch( 'edit', [this.data, this.index])
 		},
 
 		destroy(){
-			this.$store.commit( 'remove', this.index )
+			this.$store.dispatch( 'remove', this.index )
 		}
 
 	}

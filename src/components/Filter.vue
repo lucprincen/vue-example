@@ -33,7 +33,6 @@ export default {
 	methods: {
 
 		setFilter( filter ){
-			console.log( filter );
 			this.$store.state.filterBy = filter
 		}
 

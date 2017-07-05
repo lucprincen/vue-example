@@ -22,7 +22,6 @@
 	import Person from './Person.vue'
 	import PeopleFilter from './Filter.vue'
 	import AddPerson from './AddPerson.vue'
-	import {mapGetters} from 'vuex'
 
 	// a little mock data:	
 	const dataUrl = 'https://jsonbin.io/b/595bee02194a6c7f2b904008';
@@ -64,9 +63,6 @@
 				return _count+' '+ _string
 			},
 
-			//Filtered collections in the store plugin
-			//mapGetters([ 'peopleByName', 'peopleByCompany' ])
-
 		},
 
 		/** When this component gets created */
@@ -79,10 +75,34 @@
 
 			//fetch the external data, and populate the store plugin
 			populatePeople(){
+
+				let _people = window.localStorage.getItem( 'testCasePeople' );
+
+				//if people is null, fetch new data:
+				if( _people == null ){
+
+					this.setPeopleData()
+
+				}else{	
+					//else, populate the existing data 
+					this.$store.dispatch( 'populate', JSON.parse( _people ) )
+				}
+				
+			},
+
+			/** Nothing in local storage found, find it through an ajax call */
+			setPeopleData(){
+				
+				console.log( 'fetching fresh data' )
 				axios.get( dataUrl ).then( ( response ) => {
-					this.$store.commit( 'populate', response.data );
+
+					this.$store.dispatch( 'populate', response.data );
+			
 				});
+			
 			}
+
+
 		}
 	}
 </script>

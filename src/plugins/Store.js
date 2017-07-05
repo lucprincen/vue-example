@@ -20,6 +20,7 @@ const store = new Vuex.Store({
 			return state.people;
 		},
 
+		/** Get the total number of people */
 		peopleCount: state => {
 			return state.people.length;
 		},
@@ -60,7 +61,7 @@ const store = new Vuex.Store({
 
 		/** Edit a person */
 		edit: ( state, person, index ) => {
-			state.people[ index ] = person;
+			state.people[ index ] = person
 		},
 
 		/** Remove a person */
@@ -68,10 +69,39 @@ const store = new Vuex.Store({
 			state.people.splice( index, 1 )
 		},
 
+		/** Save state */
+		save: ( state ) => {
+			window.localStorage.setItem( 'testCasePeople', JSON.stringify( state.people ) )
+		},
+
 		/** Populate the store object with fetched data */
 		populate: ( state, _people ) => {
 			state.people = _people
 		},
+	},
+
+
+	actions: {
+
+		add: ( context, person ) => {
+			context.commit( 'add', person )
+			context.commit( 'save' )
+		},
+
+		edit: ( context, person, index ) => {
+			context.commit( 'edit', person, index )
+			context.commit( 'save' ) 
+		},
+
+		remove: ( context, index ) => {
+			context.commit( 'remove', index )
+			context.commit( 'save' )
+		}, 
+
+		populate: ( context, _people ) => {
+			context.commit( 'populate', _people )
+			context.commit( 'save' ) 
+		}
 	}
 
 });
@@ -81,7 +111,7 @@ const store = new Vuex.Store({
  */
 export default {  
   store,
-  install (Vue, options) {
+  install( Vue, options ) {
     Vue.prototype.$store = store
   }
 }

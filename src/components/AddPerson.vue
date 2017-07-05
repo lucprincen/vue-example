@@ -65,7 +65,7 @@
 					this.company = '';
 					this.overlay = false;
 
-					this.$store.commit( 'add', _data );
+					this.$store.dispatch( 'add', _data );
 
 				}
 			},
